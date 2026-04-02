@@ -1,0 +1,729 @@
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interstellar Pressure Washing</title>
+
+<!-- Optional Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg-main: #05060a;
+        --bg-panel: #0f1122;
+        --accent: #3a4bff;
+        --accent-soft: #5566ff;
+        --text-main: #ffffff;
+        --text-muted: #b0b4d6;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Orbitron', system-ui, sans-serif;
+        background: radial-gradient(circle at top, #151a3b 0, #05060a 45%, #020308 100%);
+        color: var(--text-main);
+        overflow-x: hidden;
+    }
+
+    /* Animated starfield background */
+    .stars, .stars2, .stars3 {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-repeat: repeat;
+        pointer-events: none;
+        z-index: -3;
+    }
+
+    .stars {
+        background-image: radial-gradient(2px 2px at 20px 20px, #ffffff 0, transparent 40%);
+        animation: drift 80s linear infinite;
+        opacity: 0.4;
+    }
+
+    .stars2 {
+        background-image: radial-gradient(1px 1px at 10px 10px, #9fb4ff 0, transparent 40%);
+        animation: drift 120s linear infinite;
+        opacity: 0.3;
+    }
+
+    .stars3 {
+        background-image: radial-gradient(2px 2px at 50px 50px, #3a4bff 0, transparent 40%);
+        animation: drift 160s linear infinite;
+        opacity: 0.2;
+    }
+
+    @keyframes drift {
+        from { transform: translate3d(0,0,0); }
+        to { transform: translate3d(-25%, -25%, 0); }
+    }
+
+    header {
+        background: linear-gradient(120deg, rgba(10,15,44,0.95), rgba(17,25,63,0.98), rgba(10,15,44,0.95));
+        padding: 40px 20px 60px;
+        text-align: center;
+        border-bottom: 2px solid var(--accent);
+        box-shadow: 0 0 40px rgba(58,75,255,0.4);
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::before {
+        content: "";
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(58,75,255,0.35) 0, transparent 60%);
+        top: -200px;
+        right: -150px;
+        opacity: 0.7;
+        filter: blur(2px);
+    }
+
+    h1 {
+        font-size: 2.8rem;
+        text-shadow: 0 0 18px var(--accent);
+        margin: 0 0 10px;
+        letter-spacing: 0.12em;
+    }
+
+    header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 1rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    nav {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        color: var(--text-main);
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(58,75,255,0.6);
+        background: rgba(5,6,10,0.4);
+        box-shadow: 0 0 10px rgba(58,75,255,0.4);
+        transition: 0.25s;
+    }
+
+    nav a:hover {
+        background: var(--accent);
+        box-shadow: 0 0 18px rgba(58,75,255,0.9);
+        transform: translateY(-1px);
+    }
+
+    .section {
+        padding: 60px 20px;
+        max-width: 1100px;
+        margin: auto;
+        position: relative;
+    }
+
+    .section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px rgba(58,75,255,0.7);
+    }
+
+    .section p {
+        color: var(--text-muted);
+        max-width: 700px;
+    }
+
+    .section-tag {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--accent-soft);
+        margin-bottom: 6px;
+    }
+
+    .flex-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: flex-start;
+    }
+
+    .panel {
+        background: rgba(15,17,34,0.96);
+        padding: 25px;
+        border-radius: 14px;
+        border: 1px solid rgba(58,75,255,0.7);
+        box-shadow: 0 0 22px rgba(26,31,77,0.9);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .panel::before {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(58,75,255,0.25) 0, transparent 60%);
+        top: -120px;
+        left: -80px;
+        opacity: 0.7;
+        filter: blur(2px);
+    }
+
+    .panel h3 {
+        margin-top: 0;
+        margin-bottom: 8px;
+    }
+
+    .panel p {
+        position: relative;
+        z-index: 1;
+    }
+
+    .pricing-table {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .card {
+        background: rgba(15,17,34,0.96);
+        padding: 22px;
+        border-radius: 12px;
+        border: 1px solid rgba(58,75,255,0.7);
+        box-shadow: 0 0 18px rgba(26,31,77,0.9);
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card::before {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(circle, rgba(58,75,255,0.25) 0, transparent 60%);
+        bottom: -120px;
+        right: -80px;
+        opacity: 0.7;
+        filter: blur(2px);
+    }
+
+    .card:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 0 26px rgba(58,75,255,0.9);
+    }
+
+    .card h3 {
+        margin-top: 0;
+        margin-bottom: 6px;
+    }
+
+    .card p {
+        margin: 4px 0 10px;
+        color: var(--text-muted);
+    }
+
+    .price {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-top: 8px;
+        text-shadow: 0 0 10px rgba(58,75,255,0.8);
+    }
+
+    ul {
+        padding-left: 18px;
+        color: var(--text-muted);
+    }
+
+    .mission-report {
+        background: rgba(15,17,34,0.96);
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid rgba(58,75,255,0.7);
+        margin-top: 20px;
+        box-shadow: 0 0 18px rgba(26,31,77,0.9);
+    }
+
+    .mission-report strong {
+        color: var(--accent-soft);
+    }
+
+    /* Mission gallery */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 20px;
+    }
+
+    .gallery-item {
+        background: rgba(15,17,34,0.96);
+        border-radius: 10px;
+        border: 1px solid rgba(58,75,255,0.7);
+        overflow: hidden;
+        box-shadow: 0 0 18px rgba(26,31,77,0.9);
+        transition: 0.25s;
+    }
+
+    .gallery-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 24px rgba(58,75,255,0.9);
+    }
+
+    .gallery-img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .gallery-body {
+        padding: 12px 14px 16px;
+        font-size: 0.9rem;
+    }
+
+    .gallery-body h4 {
+        margin: 0 0 4px;
+        font-size: 1rem;
+    }
+
+    .gallery-meta {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-bottom: 6px;
+    }
+
+    /* Forms & buttons */
+    input, textarea, select {
+        width: 100%;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(58,75,255,0.7);
+        background: rgba(5,6,10,0.9);
+        color: var(--text-main);
+        font-family: inherit;
+        font-size: 0.95rem;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        border-color: var(--accent-soft);
+        box-shadow: 0 0 12px rgba(58,75,255,0.8);
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 110px;
+    }
+
+    button {
+        background: var(--accent);
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 6px;
+        transition: 0.25s;
+        font-family: inherit;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    button:hover {
+        background: var(--accent-soft);
+        box-shadow: 0 0 16px rgba(58,75,255,0.9);
+        transform: translateY(-1px);
+    }
+
+    .note {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        margin-top: 4px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 30px 20px 40px;
+        background: rgba(10,13,31,0.98);
+        border-top: 1px solid rgba(58,75,255,0.7);
+        margin-top: 40px;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+        header {
+            padding: 30px 16px 40px;
+        }
+        h1 {
+            font-size: 2.1rem;
+        }
+        .section {
+            padding: 40px 16px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+
+<header>
+    <h1>INTERSTELLAR PRESSURE WASHING</h1>
+    <p>Houston’s Premier Cosmic Cleaning Crew</p>
+
+    <nav>
+        <a href="#mission">Mission</a>
+        <a href="#pricing">Driveway Pricing</a>
+        <a href="#gallery">Mission Reports</a>
+        <a href="#booking">Book a Mission</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="mission" class="section fade-in">
+    <div class="section-tag">Mission Brief</div>
+    <h2>🚀 Restore Your Home’s Cosmic Shine</h2>
+    <p>
+        Interstellar Pressure Washing specializes in driveway, walkway, and sidewalk cleaning with professional equipment
+        and mission‑grade precision. Every job is treated like a mission: planned, executed, and documented.
+    </p>
+    <div class="flex-row" style="margin-top:20px;">
+        <div class="panel" style="flex:1 1 260px;">
+            <h3>Why Homeowners Choose Our Crew</h3>
+            <ul>
+                <li>Professional equipment and safe cleaning methods</li>
+                <li>Clear, upfront pricing based on driveway size</li>
+                <li>Detailed mission reports with before/after photos</li>
+                <li>Locally owned and operated in the Houston/Webster area</li>
+            </ul>
+        </div>
+        <div class="panel" style="flex:1 1 260px;">
+            <h3>Mission Report Included</h3>
+            <p>
+                After every mission, you receive a digital mission report with photos, notes, and recommendations so you
+                always know the condition of your concrete surfaces.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="section fade-in">
+    <div class="section-tag">Driveway Operations</div>
+    <h2>🌌 Driveway Pricing — Based on Size</h2>
+    <p>
+        Pricing is based on driveway size and includes the driveway, front walkway, and front sidewalk where applicable.
+        Final pricing is confirmed after we review your coordinates.
+    </p>
+
+    <div class="pricing-table">
+        <div class="card">
+            <h3>☄️ Meteor Path Package</h3>
+            <p>Small / 1‑Car Driveway + Walkway + Sidewalk</p>
+            <div class="price">$179</div>
+            <ul>
+                <li>Ideal for compact driveways</li>
+                <li>Algae, dirt, and tire marks removed</li>
+                <li>Includes mission report</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>🪐 Cosmic Concrete Combo</h3>
+            <p>Standard / 2‑Car Driveway + Walkway + Sidewalk</p>
+            <div class="price">$199 – $229</div>
+            <ul>
+                <li>Most common residential layout</li>
+                <li>Deep clean for high‑traffic surfaces</li>
+                <li>Includes mission report</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>🌠 Supernova Surface Package</h3>
+            <p>Large / 3‑Car Driveway + Walkway + Sidewalk</p>
+            <div class="price">$229 – $249</div>
+            <ul>
+                <li>For extended or 3‑car driveways</li>
+                <li>Heavy buildup and staining addressed</li>
+                <li>Includes mission report</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="gallery" class="section fade-in">
+    <div class="section-tag">Mission Reports</div>
+    <h2>📡 Mission Report Gallery</h2>
+    <p>
+        Every mission is documented. Here are sample mission reports showing how we restore concrete from dull and
+        stained to bright and clean.
+    </p>
+
+    <div class="gallery-grid" id="missionGallery">
+        <!-- Items injected by JavaScript -->
+    </div>
+
+    <div class="mission-report">
+        <h3>Sample Mission Report</h3>
+        <p><strong>Mission ID:</strong> #A‑2047</p>
+        <p><strong>Location:</strong> Webster, TX</p>
+        <p><strong>Objective:</strong> 2‑Car Driveway + Walkway</p>
+        <p><strong>Status:</strong> Mission Completed Successfully</p>
+        <p><strong>Notes:</strong> Heavy algae removed. Concrete restored to approximately 90% brightness.</p>
+    </div>
+</section>
+
+<section id="booking" class="section fade-in">
+    <div class="section-tag">Schedule a Mission</div>
+    <h2>📅 Book Your Pressure Washing Mission</h2>
+    <p>
+        Use the form below to request a mission. Your request will open in your email client addressed to us with all
+        mission details filled in. We’ll confirm your launch window and final pricing.
+    </p>
+
+    <!-- Booking form using mailto -->
+    <form id="bookingForm">
+        <div class="flex-row">
+            <div style="flex:1 1 260px;">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required>
+
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" placeholder="Best number to reach you" required>
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Your email" required>
+
+                <label for="address">Service Address</label>
+                <input id="address" name="address" type="text" placeholder="Street, City, ZIP" required>
+            </div>
+
+            <div style="flex:1 1 260px;">
+                <label for="serviceType">Service Type</label>
+                <select id="serviceType" name="serviceType" required>
+                    <option value="">Select a service</option>
+                    <option value="Driveway Only">Driveway Only</option>
+                    <option value="Driveway + Walkway + Sidewalk">Driveway + Walkway + Sidewalk</option>
+                    <option value="House Wash + Driveway">House Wash + Driveway</option>
+                    <option value="Custom Mission">Custom Mission</option>
+                </select>
+
+                <label for="drivewaySize">Driveway Size</label>
+                <select id="drivewaySize" name="drivewaySize" required>
+                    <option value="">Select size</option>
+                    <option value="Small / 1-Car">Small / 1‑Car</option>
+                    <option value="Standard / 2-Car">Standard / 2‑Car</option>
+                    <option value="Large / 3-Car">Large / 3‑Car</option>
+                </select>
+
+                <label for="date">Preferred Date</label>
+                <input id="date" name="date" type="date" required>
+
+                <label for="time">Preferred Time Window</label>
+                <select id="time" name="time" required>
+                    <option value="">Select time window</option>
+                    <option value="Morning (8am–11am)">Morning (8am–11am)</option>
+                    <option value="Midday (11am–2pm)">Midday (11am–2pm)</option>
+                    <option value="Afternoon (2pm–5pm)">Afternoon (2pm–5pm)</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="details">Mission Details</label>
+        <textarea id="details" name="details" placeholder="Tell us about stains, algae, size, gate codes, or anything else we should know."></textarea>
+
+        <button type="submit">Launch Booking Request</button>
+        <div class="note">
+            This will open your email app with all mission details filled in. Just hit send to complete your request.
+        </div>
+    </form>
+</section>
+
+<section id="contact" class="section fade-in">
+    <div class="section-tag">Contact</div>
+    <h2>📞 Contact the Crew</h2>
+    <p>
+        Have questions before booking? Send a message with your address and a brief description of your mission and
+        we’ll respond with a quote and available launch windows.
+    </p>
+
+    <form id="contactForm">
+        <input type="text" id="contactName" placeholder="Name" required>
+        <input type="text" id="contactPhone" placeholder="Phone Number" required>
+        <textarea id="contactMessage" placeholder="How can we help?"></textarea>
+        <button type="submit">Send Transmission</button>
+        <div class="note">
+            This will also open your email app with your message ready to send.
+        </div>
+    </form>
+</section>
+
+<footer>
+    <p>© 2026 Interstellar Pressure Washing — Houston, TX</p>
+    <p>All missions include a detailed mission report with photos and notes.</p>
+</footer>
+
+<script>
+    // ===== Fade-in on scroll =====
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ===== Mission gallery data =====
+    const missionData = [
+        {
+            id: '#A-2047',
+            location: 'Webster, TX',
+            title: '2-Car Driveway Revival',
+            summary: 'Heavy algae and tire marks removed. Concrete brightness restored.',
+            img: 'https://images.pexels.com/photos/210617/pexels-photo-210617.jpeg?auto=compress&cs=tinysrgb&w=800'
+        },
+        {
+            id: '#B-1183',
+            location: 'Houston, TX',
+            title: 'Corner Lot Driveway & Walkway',
+            summary: 'Extended driveway and front walk cleaned for curb appeal.',
+            img: 'https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=800'
+        },
+        {
+            id: '#C-3099',
+            location: 'League City, TX',
+            title: '3-Car Supernova Surface',
+            summary: 'Large driveway with deep staining restored to a bright, even finish.',
+            img: 'https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=800'
+        }
+    ];
+
+    const galleryEl = document.getElementById('missionGallery');
+    missionData.forEach(mission => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.innerHTML = `
+            <img class="gallery-img" src="${mission.img}" alt="${mission.title}">
+            <div class="gallery-body">
+                <h4>${mission.title}</h4>
+                <div class="gallery-meta">${mission.id} • ${mission.location}</div>
+                <p>${mission.summary}</p>
+            </div>
+        `;
+        galleryEl.appendChild(item);
+    });
+
+    // ===== Booking form -> mailto email =====
+    const bookingForm = document.getElementById('bookingForm');
+    bookingForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const serviceType = document.getElementById('serviceType').value;
+        const drivewaySize = document.getElementById('drivewaySize').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const details = document.getElementById('details').value.trim();
+
+        const subject = encodeURIComponent(`New Mission Request from ${name}`);
+        const bodyLines = [
+            `Mission Request Details`,
+            `----------------------`,
+            `Name: ${name}`,
+            `Phone: ${phone}`,
+            `Email: ${email}`,
+            `Address: ${address}`,
+            ``,
+            `Service Type: ${serviceType}`,
+            `Driveway Size: ${drivewaySize}`,
+            `Preferred Date: ${date}`,
+            `Preferred Time Window: ${time}`,
+            ``,
+            `Mission Details:`,
+            `${details || 'N/A'}`
+        ];
+
+        const body = encodeURIComponent(bodyLines.join('\n'));
+
+        // TODO: replace with your real email
+        const targetEmail = 'interstellarwash1@gmail.com';
+
+        window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+    });
+
+    // ===== Contact form -> mailto email =====
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('contactName').value.trim();
+        const phone = document.getElementById('contactPhone').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+
+        const subject = encodeURIComponent(`Contact from ${name}`);
+        const bodyLines = [
+            `New Contact Transmission`,
+            `------------------------`,
+            `Name: ${name}`,
+            `Phone: ${phone}`,
+            ``,
+            `Message:`,
+            `${message || 'N/A'}`
+        ];
+        const body = encodeURIComponent(bodyLines.join('\n'));
+
+        // TODO: replace with your real email
+        const targetEmail = 'interstellarwash1@gmail.com';
+
+        window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+    });
+</script>
+
+</body>
+</html>
+```
+
+If you tell me your real business email and city exactly how you want it shown, I can hard‑code those into the file next.
